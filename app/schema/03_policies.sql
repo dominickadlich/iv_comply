@@ -3,7 +3,6 @@
 -- ===========================================
 
 -- Users can view their own organization
-drop policy if exists "View own org" on organizations;
 create policy "View own org" 
 on organizations
 for select
@@ -16,7 +15,6 @@ using(
 -- ===========================================
 
 -- Users can view colleagues in same org
-drop policy if exists "View colleagues in same org" on profiles;
 create policy "View colleagues in the same org"
 on profiles
 for select
@@ -26,7 +24,6 @@ using(
 
 
 -- Users can update their own profile (but not role or org_id)
-drop policy if exists "Update own profile" on profiles;
 create policy "Update own profile"
 on profiles
 for update
@@ -45,7 +42,6 @@ with check (
 
 
 -- Auto-insert via trigger
-drop policy if exists "Auto-insert profile on signup" on profiles;
 create policy "Auto-insert profile on signup"
 on profiles
 for insert
@@ -57,7 +53,6 @@ with check (true);
 -- ===========================================
 
 -- Everyone in org can view requirements
-drop policy if exists "View org requirements" on compliance_types;
 create policy "View org requirements"
 on compliance_types
 for select
@@ -67,7 +62,6 @@ using (
 
 
 -- Only managers can create/update/delete requirements
-drop policy if exists "Managers manage requirements" on compliance_types;
 create policy "Managers manage requirements"
 on compliance_types
 for all 
@@ -94,7 +88,6 @@ organization_id = get_my_org_id()
 -- ===========================================
 
 -- Everyone in org can view compliance records
-drop policy if exists "View org records" on compliance_records;
 create policy "View org records"
 on compliance_records
 for select
@@ -104,7 +97,6 @@ using (
 
 
 -- Users can insert their own records
-drop policy if exists "Insert own records" on compliance_records;
 create policy "Insert own records"
 on compliance_records
 for insert 
@@ -115,7 +107,6 @@ with check (
 
 
 -- Users can update their own records
-drop policy if exists "Update own records" on compliance_records;
 create policy "Update own records"
 on compliance_records
 for update
@@ -134,7 +125,6 @@ with check (
 -- ===========================================
 
 -- User can view notifications sent to them
-drop policy if exists "View own notifications" on notifications_log;
 create policy "View own notifications"
 on notifications_log
 for select
@@ -145,7 +135,6 @@ using (
 
 
 -- System/service can insert notifications (Edge functions and service_role)
-drop policy if exists "System can insert notifications" on notifications_log;
 create policy "System can insert notifications"
 on notifications_log
 for insert
