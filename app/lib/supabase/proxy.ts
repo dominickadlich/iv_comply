@@ -14,9 +14,11 @@ export async function updateSession(request: NextRequest) {
     {
       cookies: {
         getAll() {
-          return request.cookies.getAll()
+          return request.cookies.getAll() // Read all cookies from request
         },
         setAll(cookiesToSet) {
+            // Write cookies to BOTH request and response
+            // This ensures consistency
           cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
           supabaseResponse = NextResponse.next({
             request,
@@ -36,6 +38,12 @@ export async function updateSession(request: NextRequest) {
   const { data } = await supabase.auth.getClaims()
 
   const user = data?.claims
+
+  console.log('🔒 Proxy running:', {
+        path: request.nextUrl.pathname,
+        hasUser: !!user,
+        userId: user?.sub,
+    })
 
   if (
     !user &&
