@@ -6,9 +6,7 @@ export default function Home() {
       <div className="space-y-4">
         <h1 className="text-2xl font-bold">iv_comply</h1>
         <div className="flex gap-2">
-          <Button variant="default">Default</Button>
-          <Button variant="destructive">Destructive</Button>
-          <Button variant="outline">Outline</Button>
+          
         </div>
       </div>
     </main>
